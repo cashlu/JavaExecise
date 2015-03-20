@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 
 
-public class SimpleTextFileWithException {
+public class SimpleTextFileWriterWithException {
     /**
      * 创建FileWriter指向放在最上层，是因为如果放在try代码块内，finally访问不到。
      * fw.close()放在finally内的嵌套try代码块内，并且被if()包裹，是因为关闭资源的操作永远要执行，

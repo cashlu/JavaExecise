@@ -8,7 +8,7 @@ import java.io.IOException;
  * 在硬盘上创建一个文件，并向文件中添加一些文字。
  * Created by cashlu on 15/3/19.
  */
-public class SimpleTextFile {
+public class SimpleTextFileWriter {
     public static void main(String[] args) throws IOException {
         /*
         创建FileWriter对象，会在路径位置创建文件。
