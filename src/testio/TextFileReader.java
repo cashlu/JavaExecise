@@ -68,17 +68,19 @@ public class TextFileReader {
 
         System.out.println("----------------");
 
+
         try {
             fr = new FileReader(f);
-            char[] buffer = new char[4];
-            int num = fr.read(buffer);
-            System.out.print("num = " + num + "..." + new String(buffer));
-
+            char[] buffer = new char[1024];
+            int num = 0;
+            while ((num = fr.read(buffer)) != -1){
+                System.out.println(new String(buffer, 0, num));
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }finally {
             try {
                 if (fr != null)
                     fr.close();
@@ -86,5 +88,6 @@ public class TextFileReader {
                 e.printStackTrace();
             }
         }
+
     }
 }
