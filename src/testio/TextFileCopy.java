@@ -13,8 +13,9 @@ public class TextFileCopy {
 
     /**
      * 文件拷贝方法。
-     * @param s 源文件
-     * @param d 目标文件，不存在则创建
+     *
+     * @param s      源文件
+     * @param d      目标文件，不存在则创建
      * @param append 是否追加拷贝，如果该参数为true，并且该目标文件存在时，则向目标文件结尾追加拷贝。
      */
     public void copy(File s, File d, boolean append) {
@@ -41,13 +42,19 @@ public class TextFileCopy {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (fr != null)
+            if (fr != null) {
+                try {
                     fr.close();
-                if (fw != null)
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fw != null) {
+                try {
                     fw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -60,6 +67,5 @@ public class TextFileCopy {
         TextFileCopy t = new TextFileCopy();
         t.copy(s, d, false);
         t.copy(as, d, true);
-
     }
 }
