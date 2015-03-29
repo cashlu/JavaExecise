@@ -36,6 +36,7 @@ public class TextFileCopy {
                 System.out.print(new String(buffer, 0, len));
                 //write the content into destination file
                 fw.write(buffer);
+                fw.flush();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
