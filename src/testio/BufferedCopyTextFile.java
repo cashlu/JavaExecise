@@ -11,13 +11,13 @@ public class BufferedCopyTextFile {
         File s = new File("/Users/cashlu/Desktop/demo.txt");
         File d = new File("/Users/cashlu/Desktop/demoTo.txt");
         copy(s, d, true);
-
     }
 
     /**
      * 文本文件通过缓存复制的方法。
-     * @param s 源文件
-     * @param d 目的地文件
+     *
+     * @param s        源文件
+     * @param d        目的地文件
      * @param isAppend 是否追加到末尾
      */
     private static void copy(File s, File d, boolean isAppend) {
@@ -39,14 +39,14 @@ public class BufferedCopyTextFile {
             e.printStackTrace();
         } finally {
             try {
-                if (br != null){
+                if (br != null) {
                     br.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                if (bw != null){
+                if (bw != null) {
                     bw.close();
                 }
             } catch (IOException e) {
