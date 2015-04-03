@@ -29,9 +29,8 @@ public class MyBufferedReader {
         while ((ch = fr.read()) != -1) {
             if (ch == '\r')
                 continue;
-            if (ch == '\n'){
+            if (ch == '\n')
                 return sb.toString();
-            }
             else
                 //这里千万记住要强转，因为之前将ch定义为int了，不转的话，返回的是文字的字符集编码。
                 sb.append((char)ch);
