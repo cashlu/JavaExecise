@@ -18,7 +18,7 @@ public class FileStreamRead {
 
     /**
      * FileInputStream对象的read()方法的JDK说明如下：
-     * Reads up to buf.length bytes of data from this input stream into an array of bytes.
+     * Reads up to buf.length() bytes of data from this input stream into an array of bytes.
      * This method blocks until some input is available.
      * 简单的说，就是读取参数数组长度的字节，而字节数组初始化时，长度指定为下次非阻断能读取到的长度，
      * 所以在此例中，不用循环就读取了文件的全部内容。
