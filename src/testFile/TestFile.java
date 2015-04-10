@@ -45,5 +45,14 @@ public class TestFile {
         Date date = new Date(f.lastModified());
         System.out.println(date);
 
+        /*
+        如果一个File对象指向的文件不存在，那么当判断其为文件还是文件夹时，结果都是false。
+         */
+        File noFile = new File("/Users/cashlu/Desktop/11111.txt");
+        System.out.println(noFile.isFile());
+        System.out.println(noFile.isDirectory());
+        //文件的大小
+        System.out.println(f2.length());
+
     }
 }
