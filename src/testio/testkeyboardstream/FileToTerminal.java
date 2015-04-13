@@ -3,11 +3,9 @@ package testio.testkeyboardstream;
 import java.io.*;
 
 /**
- * 实现输入字符流到输出字节流的转换。
- * 实现的效果是，键盘输入字符，屏幕输出。
- * Created by cashlu on 15/4/11.
+ * Created by cashlu on 15/4/12.
  */
-public class CharsetToByte {
+public class FileToTerminal {
     public static void main(String[] args) throws IOException {
         //创建输入、输出流对象，指向标准输入、输出。
         //这是键盘录入的最常见的写法。
@@ -17,7 +15,8 @@ public class CharsetToByte {
         InputStreamReader isr = new InputStreamReader(in);
         OutputStreamWriter osw = new OutputStreamWriter(out);
 
-        BufferedReader br = new BufferedReader(isr);
+        //将输入流改为一个文件的读取流。
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/Users/cashlu/Desktop/file.txt")));
         BufferedWriter bw = new BufferedWriter(osw);
         //可以用一个语句来替换上面的三个语句，使用了匿名对象。
 //        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
