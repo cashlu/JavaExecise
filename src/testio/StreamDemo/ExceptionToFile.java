@@ -1,10 +1,9 @@
 package testio.StreamDemo;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
+ * 将异常信息重定向输出至文本文件。
  * Created by cashlu on 15/4/13.
  */
 public class ExceptionToFile {
@@ -16,8 +15,14 @@ public class ExceptionToFile {
             bw = new BufferedWriter(new FileWriter("/Users/cashlu/Desktop/log.txt"));
             System.out.println(arr[3]);
         } catch (Exception e) {
-            e.printStackTrace();
-            writeLog(bw, e);
+            //将错误输出至文件，与自己实现的writeLog()方法作用一样
+            try {
+                e.printStackTrace(new PrintStream("/Users/cashlu/Desktop/log.txt"));
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
+
+//            writeLog(bw, e);
         }
     }
 
