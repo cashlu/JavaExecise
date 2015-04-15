@@ -1,6 +1,8 @@
 package testio.testfile;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Date;
 
@@ -48,5 +50,62 @@ public class FileMethods {
         System.out.println("getTotalSpace()\t" + f3.getTotalSpace());
         System.out.println("lastModified()\t" + new Date(f3.lastModified()));
 
+        File list[] = File.listRoots();
+        for (File f : list) {
+            System.out.println(f);
+        }
+
+        System.out.println("-------------");
+
+        File d = new File("/Users/cashlu");
+        String[] names = d.list();
+        for (String name : names)
+            System.out.println(name + "\t");
+
+        System.out.println("-------------");
+        listFilenameFilteDemo();
+
     }
+
+    /**
+     * 打印指定目录下指定后缀的文件，目录忽略。
+     * 测试File.listFile(FileFilter)方法。
+     * 该方法要求传入的形参是FileFilter对象。
+     */
+    public static void listFileFilterDemo(){
+        File txtD = new File("/Users/cashlu/Desktop");
+        FileFilter filter = new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                if (pathname.isFile() == true)
+                    return pathname.getPath().endsWith(".txt");
+                else
+                    return false;
+            }
+        };
+        File[] files = txtD.listFiles(filter);
+        for (File f : files)
+            System.out.println(f.getAbsolutePath());
+    }
+
+    /**
+     * 打印指定目录下指定后缀的文件，目录忽略。
+     * 测试File.listFile(FileNameFilter)方法。
+     * 该方法要求传入的形参是FileNameFilter对象。
+     */
+    public static void listFilenameFilteDemo(){
+        System.out.println("listFileFilterDemo()...");
+        File txtD = new File("/Users/cashlu/Desktop");
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".txt");
+            }
+        };
+        String docs[] = txtD.list(filter);
+        for (String name : docs)
+            System.out.println(name + "\t");
+        System.out.println("-----------------");
+    }
+
 }
