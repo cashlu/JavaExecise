@@ -65,6 +65,12 @@ public class FileMethods {
         System.out.println("-------------");
         listFilenameFilteDemo();
 
+        System.out.println("makeDirWithFiles()-------------");
+        makeDirWithFiles();
+        File dir = new File("/Users/cashlu/Desktop/aaa/");
+        delNoneEmptyDIr(dir);
+
+
     }
 
     /**
@@ -72,7 +78,7 @@ public class FileMethods {
      * 测试File.listFile(FileFilter)方法。
      * 该方法要求传入的形参是FileFilter对象。
      */
-    public static void listFileFilterDemo(){
+    public static void listFileFilterDemo() {
         File txtD = new File("/Users/cashlu/Desktop");
         FileFilter filter = new FileFilter() {
             @Override
@@ -93,7 +99,7 @@ public class FileMethods {
      * 测试File.listFile(FileNameFilter)方法。
      * 该方法要求传入的形参是FileNameFilter对象。
      */
-    public static void listFilenameFilteDemo(){
+    public static void listFilenameFilteDemo() {
         System.out.println("listFileFilterDemo()...");
         File txtD = new File("/Users/cashlu/Desktop");
         FilenameFilter filter = new FilenameFilter() {
@@ -106,6 +112,47 @@ public class FileMethods {
         for (String name : docs)
             System.out.println(name + "\t");
         System.out.println("-----------------");
+    }
+
+    /**
+     * 删除一个带有内容的多级目录。
+     * 1、先创建文件对象
+     * 2、创建目录
+     * 3、创建文件
+     * 4、删除文件
+     * 5、删除目录
+     */
+
+    public static void makeDirWithFiles() throws IOException {
+        File file = new File("/Users/cashlu/Desktop/aaa/bbb/ccc/abc.txt");
+        boolean makeDirsRes = file.getParentFile().mkdirs();
+        boolean fileCreateRes = file.createNewFile();
+        System.out.println("文件名称:\t" + file.getAbsolutePath() + "\n"
+                + "目录创建结果:\t" + makeDirsRes + "\n"
+                + "文件创建结果:\t" + fileCreateRes);
+    }
+
+
+    /**
+     * 删除一个非空的多级目录。
+     * 因为要多级遍历，所以使用到了递归。
+     * <p/>
+     * 作为传输传入的dir，必须是一个目录，如果不是目录的话，listFiles()方法会返回null,
+     * 那么在for循环遍历的时候，会抛出空指针异常。
+     *
+     * @param dir 需要删除的目录。
+     */
+    public static void delNoneEmptyDIr(File dir) {
+        File files[] = dir.listFiles();
+        for (File file : files) {
+            //遍历数组，如果元素是目录，则递归。
+            if (file.isDirectory()) {
+                delNoneEmptyDIr(file);
+            } else {
+                System.out.println("删除文件：" + file.delete() + "\t" + file.getAbsolutePath());
+            }
+        }
+        System.out.println("删除目录：" + dir.delete() + "\t" + dir.getAbsolutePath());
     }
 
 }

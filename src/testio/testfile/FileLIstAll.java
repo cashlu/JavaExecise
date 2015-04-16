@@ -39,8 +39,9 @@ public class FileLIstAll {
      */
     public static void listAllFileWithLevel(File file, int level) {
         for (int i = 0; i < level; i++) {
-            System.out.print("-");
+            System.out.print(" ");
         }
+        System.out.print("|-");
         System.out.println(file.getName());
 
         if (file.isDirectory()){
