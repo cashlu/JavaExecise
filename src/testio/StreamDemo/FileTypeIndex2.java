@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class FileTypeIndex2 {
     public static void main(String[] args) {
-        File searchRoot = new File("/Users/cashlu/Desktop");
+        File searchRoot = new File("/Users/cashlu/IdeaProjects");
         File resFile = new File("/Users/cashlu/Desktop/list.txt");
         List<File> fileList = new ArrayList<File>();
-        fileToList(searchRoot, fileList, ".txt");
+        fileToList(searchRoot, fileList, ".java");
         for (File f : fileList){
             System.out.println(f.getAbsolutePath());
         }
@@ -49,10 +49,13 @@ public class FileTypeIndex2 {
 
     public static void writeToFile(List<File> list, File listFile) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(listFile));
+        int count = 0;
         for (File f : list){
+            count++;
             bw.write(f.getAbsolutePath());
             bw.newLine();
         }
+        bw.write("文件数：" + count);
         bw.close();
     }
 }
