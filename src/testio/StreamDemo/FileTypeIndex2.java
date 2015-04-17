@@ -28,6 +28,7 @@ public class FileTypeIndex2 {
         try {
             writeToFile(fileList, resFile);
         } catch (IOException e) {
+
             e.printStackTrace();
         }
 
