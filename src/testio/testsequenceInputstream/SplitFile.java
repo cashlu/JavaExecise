@@ -52,7 +52,7 @@ public class SplitFile {
             Enumeration<BufferedInputStream> en = v.elements();
             sis = new SequenceInputStream(en);
             bos = new BufferedOutputStream(new FileOutputStream(joinDestFile));
-            int by;
+            int by = 0;
             while ((by = sis.read()) != -1){
                 bos.write(by);
             }
@@ -87,10 +87,10 @@ public class SplitFile {
      */
     public static void splitFile(File src, File destDir) throws IOException {
         FileInputStream fis = new FileInputStream(src);
-        FileOutputStream fos;
+        FileOutputStream fos = null;
         //创建一个1M的缓冲区，将文件按照1M的大小进行切割。
         byte buf[] = new byte[1024 * 1024];
-        int len;
+        int len = 0;
         int fileName = 0;
         while ((len = fis.read(buf)) != -1){
             fos = new FileOutputStream(destDir.getPath() + "/" + fileName++ + ".part");
