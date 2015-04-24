@@ -38,6 +38,10 @@ public class SplitFile {
                 因为分割文件时，是按字节读取一定量后截取的，所以在合并时，是顺序敏感的。
                 而Vector是有序集合（比起ArrayList线程安全），刚好可以按照顺序保存每一个文件片段。
                 所以当Vector对象在add时，顺序一定要正确。
+
+                Vector虽然线程安全，但是效率较低，所以在不考虑多线程操作的情况下，可以使用ArrayList来代替。
+                但是ArrayList没有枚举，只有迭代。所以要用迭代器获取元素，然后用枚举封装，重写hasMoreElement()
+                和nextElement()方法 。
              */
             v.add(new BufferedInputStream(new FileInputStream("/Users/cashlu/Desktop/pics/0.part")));
             v.add(new BufferedInputStream(new FileInputStream("/Users/cashlu/Desktop/pics/1.part")));
@@ -48,7 +52,7 @@ public class SplitFile {
             Enumeration<BufferedInputStream> en = v.elements();
             sis = new SequenceInputStream(en);
             bos = new BufferedOutputStream(new FileOutputStream(joinDestFile));
-            int by = 0;
+            int by;
             while ((by = sis.read()) != -1){
                 bos.write(by);
             }
@@ -83,10 +87,10 @@ public class SplitFile {
      */
     public static void splitFile(File src, File destDir) throws IOException {
         FileInputStream fis = new FileInputStream(src);
-        FileOutputStream fos = null;
+        FileOutputStream fos;
         //创建一个1M的缓冲区，将文件按照1M的大小进行切割。
         byte buf[] = new byte[1024 * 1024];
-        int len = 0;
+        int len;
         int fileName = 0;
         while ((len = fis.read(buf)) != -1){
             fos = new FileOutputStream(destDir.getPath() + "/" + fileName++ + ".part");
