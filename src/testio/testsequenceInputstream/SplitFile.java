@@ -27,10 +27,11 @@ public class SplitFile {
 
     /**
      * 文件的合并方法。
-     * @param v 被合并文件的Vector集合封装对象。
+     *
+     * @param v            被合并文件的Vector集合封装对象。
      * @param joinDestFile 合并后的目的地对象。
      */
-    public static void joinFiles(Vector<BufferedInputStream> v, File joinDestFile){
+    public static void joinFiles(Vector<BufferedInputStream> v, File joinDestFile) {
         SequenceInputStream sis = null;
         BufferedOutputStream bos = null;
         try {
@@ -53,7 +54,7 @@ public class SplitFile {
             sis = new SequenceInputStream(en);
             bos = new BufferedOutputStream(new FileOutputStream(joinDestFile));
             int by = 0;
-            while ((by = sis.read()) != -1){
+            while ((by = sis.read()) != -1) {
                 bos.write(by);
             }
             System.out.println("合并文件完成...");
@@ -61,15 +62,15 @@ public class SplitFile {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if (sis != null){
+        } finally {
+            if (sis != null) {
                 try {
                     sis.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if (bos != null){
+            if (bos != null) {
                 try {
                     bos.close();
                 } catch (IOException e) {
@@ -81,7 +82,8 @@ public class SplitFile {
 
     /**
      * 文件的分割方法。
-     * @param src 要分割的源文件。
+     *
+     * @param src     要分割的源文件。
      * @param destDir 分割后分卷文件存放的目录。
      * @throws IOException
      */
@@ -92,7 +94,7 @@ public class SplitFile {
         byte buf[] = new byte[1024 * 1024];
         int len = 0;
         int fileName = 0;
-        while ((len = fis.read(buf)) != -1){
+        while ((len = fis.read(buf)) != -1) {
             fos = new FileOutputStream(destDir.getPath() + "/" + fileName++ + ".part");
             fos.write(buf, 0, len);
             fos.close();
