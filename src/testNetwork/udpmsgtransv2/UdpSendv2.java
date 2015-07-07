@@ -16,20 +16,22 @@ import java.net.*;
  */
 public class UdpSendv2 {
     public static void main(String[] args) {
+        //将DatagramSocket和BufferedReader对象定义在外边，是为了最后可以释放资源。
         DatagramSocket ds = null;
         BufferedReader br = null;
         try {
+            //发送端绑定8888端口
             ds = new DatagramSocket(8888);
             br = new BufferedReader(new InputStreamReader(System.in));
-            while (true) {
-                String msg = br.readLine();
+            String msg = null;
+            while ((msg = br.readLine()) != null) {
                 if (msg.equals("OVER")) {
                     break;
                 }
                 byte[] data = msg.getBytes();
                 //末尾的端口号是对端的端口，因为单机测试，所以上面创建DatagramSocket时绑定的端口必须区分开。
-//                DatagramPacket dp = new DatagramPacket(data, data.length, InetAddress.getByName("rMBP.local"), 9999);
-                DatagramPacket dp = new DatagramPacket(data, data.length, InetAddress.getByName("127.0.0.1"), 9999);
+                DatagramPacket dp = new DatagramPacket(data, data.length, InetAddress.getByName("rMBP.local"), 9999);
+//                DatagramPacket dp = new DatagramPacket(data, data.length, InetAddress.getByName("127.0.0.1"), 8888);
                 ds.send(dp);
             }
         } catch (SocketException e) {
