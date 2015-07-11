@@ -26,7 +26,8 @@ public class Server {
             int len = in.read(buf);
             String msgIn = new String(buf, 0, len);
             System.out.println("CLient say: " + msgIn);
-            String msgOut = "I got it!";
+//            String msgOut = "I got it!";
+            String msgOut = msgIn.toUpperCase();
             out.write(msgOut.getBytes());
 
         } catch (IOException e) {
